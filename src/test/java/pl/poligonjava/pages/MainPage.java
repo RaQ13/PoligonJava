@@ -18,6 +18,6 @@ public class MainPage {
 
     public AccountPage myAccountClick() {
         myAccLink.click();
-        return new AccountPage();
+        return new AccountPage(driver);
     }
 }

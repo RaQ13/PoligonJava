@@ -14,13 +14,23 @@ public class AccountPage {
     @FindBy(id = "reg_password")
     private WebElement regPass;
 
-    public AccountPage() {
+    @FindBy(name = "register")
+    private WebElement registerBtn;
+
+    public AccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    public void register(String email) {
+    public AccountPage registerDataFill(String email, String pass) {
         regInput.sendKeys(email);
+        regPass.sendKeys(pass);
+        return this;
+    }
+
+    public LoggedPage registerClick() {
+        registerBtn.click();
+        return new LoggedPage(driver);
     }
 
 }
