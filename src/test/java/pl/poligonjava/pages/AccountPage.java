@@ -9,13 +9,22 @@ public class AccountPage {
     private WebDriver driver;
 
     @FindBy(id = "reg_email")
-    private WebElement regInput;
+    private WebElement regEmail;
 
     @FindBy(id = "reg_password")
     private WebElement regPass;
 
+    @FindBy(id = "username")
+    private WebElement loginName;
+
+    @FindBy(id = "password")
+    private WebElement loginPass;
+
     @FindBy(name = "register")
     private WebElement registerBtn;
+
+    @FindBy(name = "login")
+    private WebElement loginBtn;
 
     public AccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -23,13 +32,24 @@ public class AccountPage {
     }
 
     public AccountPage registerDataFill(String email, String pass) {
-        regInput.sendKeys(email);
+        regEmail.sendKeys(email);
         regPass.sendKeys(pass);
+        return this;
+    }
+
+    public AccountPage loginDataFill(String login, String pass) {
+        loginName.sendKeys(login);
+        loginPass.sendKeys(pass);
         return this;
     }
 
     public LoggedPage registerClick() {
         registerBtn.click();
+        return new LoggedPage(driver);
+    }
+
+    public LoggedPage loginClick() {
+        loginBtn.click();
         return new LoggedPage(driver);
     }
 
