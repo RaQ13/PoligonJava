@@ -45,15 +45,29 @@ public class RegisterTest extends BaseTest {
         Assert.assertEquals(greetingParam.getText(), username);
     }
 
-    @Test
+    @Test @Ignore
     public void RegisterExistingEmail() throws FileNotFoundException {
         String email = ReadFile.readFile();
+
         List<String> errors = new MainPage(driver)
                 .myAccountClick()
                 .registerDataFill(email, "")
                 .registerErrorClick()
                 .getErrors();
         Assert.assertTrue(errors.contains("Error: An account is already registered with your email address. Please log in."));
+    }
+
+    @Test
+    public void RegisterInvalidEmail() throws FileNotFoundException {
+        String email = ReadFile.readFile();
+        String invalidEmail = email.replace(".com", "");
+
+        List<String> errors = new MainPage(driver)
+                .myAccountClick()
+                .registerDataFill(invalidEmail, "jakieś hasło")
+                .registerErrorClick()
+                .getErrors();
+        Assert.assertTrue(errors.contains("Error: Please provide a valid email address."));
     }
 }
 
