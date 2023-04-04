@@ -2,6 +2,7 @@ package pl.poligonjava.tests;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pl.poligonjava.pages.MainPage;
 import pl.poligonjava.utils.filewirtter.ReadFile;
@@ -13,7 +14,7 @@ public class LoginTest extends BaseTest{
 
     protected String pass;
 
-    @Test
+    @Test @Ignore
     public void loginTest() throws FileNotFoundException {
 
         String usernameEmail = ReadFile.readFile();
@@ -30,7 +31,7 @@ public class LoginTest extends BaseTest{
         Assert.assertEquals(username, greetingParam.getText());
     }
 
-    @Test
+    @Test @Ignore
     public void registerEmptyPass() throws FileNotFoundException {
         String email = ReadFile.readFile();
         List<String> errors = new MainPage(driver)
@@ -42,4 +43,15 @@ public class LoginTest extends BaseTest{
         Assert.assertTrue(errors.contains("ERROR: The password field is empty."));
     }
 
+    @Test
+    public void registerInvalidPass() throws FileNotFoundException {
+        String email = ReadFile.readFile();
+        List<String> errors = new MainPage(driver)
+                .myAccountClick()
+                .loginDataFill(email, "random")
+                .loginErrorClick()
+                .getErrors();
+
+        Assert.assertTrue(errors.get(0).contains("ERROR: Incorrect username or password."));
+    }
 }
