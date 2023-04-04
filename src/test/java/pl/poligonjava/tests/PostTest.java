@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 public class PostTest extends BaseTest{
 
     @Test
-    public void submitComment() throws FileNotFoundException {
+    public void submitFirstPostComment() throws FileNotFoundException {
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
         String url = driver.getCurrentUrl();
@@ -24,7 +24,7 @@ public class PostTest extends BaseTest{
     }
 
     @Test
-    public void submitDuplicateComment() throws FileNotFoundException {
+    public void submitDuplicateFirstPostComment() throws FileNotFoundException {
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
         String url = driver.getCurrentUrl();
@@ -37,5 +37,17 @@ public class PostTest extends BaseTest{
 
         System.out.println(errorMsg);
         Assert.assertTrue(errorMsg.contains("Duplicate comment detected; it looks as though you’ve already said that!"));
+    }
+
+    @Test
+    public void submitSecondPostComment() throws FileNotFoundException {
+        String email = ReadFile.readFile();
+        String name = email.replace("@gmail.com", "");
+        String url = driver.getCurrentUrl();
+
+        new MainPage(driver)
+                .getSecondPost()
+                .fillCommentForm(email, name, email, url)
+                .submitCommentForm();
     }
 }

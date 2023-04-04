@@ -63,4 +63,9 @@ public class MainPage {
         postsLinks.get(0).click();
         return new PostPage(driver);
     }
+
+    public PostPage getSecondPost() {
+        postsLinks.get(1).click();
+        return new PostPage(driver);
+    }
 }
