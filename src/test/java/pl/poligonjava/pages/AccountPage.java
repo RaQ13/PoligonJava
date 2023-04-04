@@ -75,5 +75,4 @@ public class AccountPage {
         SeleniumHelper.waitForNotEmptyList(driver, By.xpath("//ul[@class='woocommerce-error']//li"));
         return errors.stream().map(WebElement::getText).collect(Collectors.toList());
     }
-
 }

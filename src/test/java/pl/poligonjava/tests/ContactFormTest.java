@@ -1,8 +1,10 @@
 package pl.poligonjava.tests;
 
+import org.openqa.selenium.Alert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.poligonjava.pages.MainPage;
+import pl.poligonjava.utils.SeleniumHelper;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 
 import java.io.FileNotFoundException;
@@ -16,7 +18,7 @@ public class ContactFormTest extends BaseTest{
 
         String respond = new MainPage(driver)
                 .fillContactForm(name, email, "random message")
-                .submitForm()
+                .submitContactForm()
                 .getSubmitRespond().getText();
 
         Assert.assertEquals(respond, "It is demo page! We are not sending emails!");
@@ -28,7 +30,7 @@ public class ContactFormTest extends BaseTest{
 
         String respond = new MainPage(driver)
                 .fillContactForm(name, name, "random message")
-                .submitForm()
+                .submitContactForm()
                 .getSubmitRespond().getText();
 
         Assert.assertTrue(respond.contains("Invalid form submission : some fields have not been entered properly. The following field is not well formed : Test Data."));

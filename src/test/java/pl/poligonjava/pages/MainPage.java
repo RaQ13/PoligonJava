@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pl.poligonjava.utils.SeleniumHelper;
 
+import java.util.List;
+
 public class MainPage {
 
     private WebDriver driver;
@@ -27,6 +29,9 @@ public class MainPage {
     @FindBy (id = "sek-form-respond")
     private WebElement formRespondParam;
 
+    @FindBy(xpath = "//a[@class='czr-title']")
+    private List<WebElement> postsLinks;
+
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -44,7 +49,7 @@ public class MainPage {
         return this;
     }
 
-    public MainPage submitForm() {
+    public MainPage submitContactForm() {
         submitFormBtn.click();
         return this;
     }
@@ -52,5 +57,10 @@ public class MainPage {
     public WebElement getSubmitRespond() {
         SeleniumHelper.waitForElemetToBeVisible(driver, formRespondParam);
         return formRespondParam;
+    }
+
+    public PostPage getFirstPost() {
+        postsLinks.get(0).click();
+        return new PostPage(driver);
     }
 }
