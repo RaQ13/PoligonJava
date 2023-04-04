@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class AccountPage {
     private WebDriver driver;
 
@@ -25,6 +28,9 @@ public class AccountPage {
 
     @FindBy(name = "login")
     private WebElement loginBtn;
+
+    @FindBy(xpath = "//ul[@class='woocommerce-error']//li")
+    private List<WebElement> errors;
 
     public AccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -48,9 +54,18 @@ public class AccountPage {
         return new LoggedPage(driver);
     }
 
+    public AccountPage registerErrorClick() {
+        registerBtn.click();
+        return this;
+    }
+
     public LoggedPage loginClick() {
         loginBtn.click();
         return new LoggedPage(driver);
+    }
+
+    public List<String> getErrors() {
+        return errors.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
 }

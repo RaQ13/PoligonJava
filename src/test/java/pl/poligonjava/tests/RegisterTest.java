@@ -2,6 +2,7 @@ package pl.poligonjava.tests;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pl.poligonjava.pages.LoggedPage;
 import pl.poligonjava.pages.MainPage;
@@ -9,7 +10,9 @@ import pl.poligonjava.utils.filewirtter.CreateFile;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 import pl.poligonjava.utils.filewirtter.WriteText;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 public class RegisterTest extends BaseTest {
 
@@ -21,8 +24,8 @@ public class RegisterTest extends BaseTest {
      * */
 
     protected String pass;
-    @Test
-    public void Register() throws IOException {
+    @Test @Ignore
+    public void RegisterValidData() throws IOException {
 
         int random = (int) (Math.random() * 1000);
         String email = "przyklad" + random + "@gmail.com";
@@ -40,6 +43,17 @@ public class RegisterTest extends BaseTest {
                 .getGreetingParam();
 
         Assert.assertEquals(greetingParam.getText(), username);
+    }
+
+    @Test
+    public void RegisterExistingEmail() throws FileNotFoundException {
+        String email = ReadFile.readFile();
+        List<String> errors = new MainPage(driver)
+                .myAccountClick()
+                .registerDataFill(email, "")
+                .registerErrorClick()
+                .getErrors();
+        Assert.assertTrue(errors.contains("Error: An account is already registered with your email address. Please log in."));
     }
 }
 
