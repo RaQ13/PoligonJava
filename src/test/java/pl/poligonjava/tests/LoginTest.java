@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest{
 
     protected String pass;
 
-    @Test @Ignore
+    @Test
     public void loginTest() throws FileNotFoundException {
 
         String usernameEmail = ReadFile.readFile();
@@ -31,7 +31,7 @@ public class LoginTest extends BaseTest{
         Assert.assertEquals(username, greetingParam.getText());
     }
 
-    @Test @Ignore
+    @Test
     public void registerEmptyPass() throws FileNotFoundException {
         String email = ReadFile.readFile();
         List<String> errors = new MainPage(driver)

@@ -11,6 +11,21 @@ public class MainPage {
     @FindBy (linkText = "My account")
     private WebElement myAccLink;
 
+    @FindBy (id = "nimble_name317664225")
+    private WebElement formDataName;
+
+    @FindBy (id = "nimble_email317664225")
+    private WebElement formDataEmail;
+
+    @FindBy (id = "nimble_message317664225")
+    private WebElement formDataMessage;
+
+    @FindBy (id = "nimble_submit317664225")
+    private WebElement submitFormBtn;
+
+    @FindBy (id = "sek-form-respond")
+    private WebElement formRespondParam;
+
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -19,5 +34,21 @@ public class MainPage {
     public AccountPage myAccountClick() {
         myAccLink.click();
         return new AccountPage(driver);
+    }
+
+    public MainPage fillContactForm(String name, String email, String message) {
+        formDataName.sendKeys(name);
+        formDataEmail.sendKeys(email);
+        formDataMessage.sendKeys(message);
+        return this;
+    }
+
+    public MainPage submitForm() {
+        submitFormBtn.click();
+        return this;
+    }
+
+    public WebElement getSubmitRespond() {
+        return formRespondParam;
     }
 }
