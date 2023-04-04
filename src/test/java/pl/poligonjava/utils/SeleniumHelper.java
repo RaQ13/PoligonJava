@@ -25,4 +25,8 @@ public class SeleniumHelper {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(browser -> browser.findElements(locator).size() >0);
     }
+
+    public static void stepBack(WebDriver driver) {
+        driver.navigate().back();
+    }
 }

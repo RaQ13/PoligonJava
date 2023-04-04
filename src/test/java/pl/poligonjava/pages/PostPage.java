@@ -39,7 +39,8 @@ public class PostPage {
         return this;
     }
 
-    public void submitCommentForm() {
+    public ErrorPage submitCommentForm() {
         commentSubmitBtn.click();
+        return new ErrorPage(driver);
     }
 }
