@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class ErrorPage {
 
     protected WebDriver driver;
-    @FindBy(xpath = "//body//p")
+    @FindBy(xpath = "//body//p[contains(text(), 'Duplicate')]")
     private WebElement errorMsg;
 
     public ErrorPage(WebDriver driver) {
