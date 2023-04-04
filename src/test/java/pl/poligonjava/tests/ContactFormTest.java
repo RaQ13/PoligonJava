@@ -21,4 +21,17 @@ public class ContactFormTest extends BaseTest{
 
         Assert.assertEquals(respond, "It is demo page! We are not sending emails!");
     }
+
+    @Test
+    public void submitFormInvalidEmail() throws FileNotFoundException {
+        String name = ReadFile.readFile().replace("@gmail.com", "");
+
+        String respond = new MainPage(driver)
+                .fillContactForm(name, name, "random message")
+                .submitForm()
+                .getSubmitRespond().getText();
+
+        Assert.assertTrue(respond.contains("Invalid form submission : some fields have not been entered properly. The following field is not well formed : Test Data."));
+    }
 }
+

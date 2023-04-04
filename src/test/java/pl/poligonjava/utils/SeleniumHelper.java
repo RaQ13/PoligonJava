@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class SeleniumHelper {
 
-    public static void waiftForElementToExist(WebDriver driver, By locator) {
+    public static void waitForElementToExist(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
