@@ -64,6 +64,11 @@ public class AccountPage {
         return new LoggedPage(driver);
     }
 
+    public AccountPage loginErrorClick() {
+        loginBtn.click();
+        return this;
+    }
+
     public List<String> getErrors() {
         return errors.stream().map(WebElement::getText).collect(Collectors.toList());
     }

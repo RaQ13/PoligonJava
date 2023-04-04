@@ -24,7 +24,7 @@ public class RegisterTest extends BaseTest {
      * */
 
     protected String pass;
-    @Test @Ignore
+    @Test
     public void RegisterValidData() throws IOException {
 
         int random = (int) (Math.random() * 1000);
@@ -45,7 +45,7 @@ public class RegisterTest extends BaseTest {
         Assert.assertEquals(greetingParam.getText(), username);
     }
 
-    @Test @Ignore
+    @Test
     public void RegisterExistingEmail() throws FileNotFoundException {
         String email = ReadFile.readFile();
 
@@ -69,5 +69,6 @@ public class RegisterTest extends BaseTest {
                 .getErrors();
         Assert.assertTrue(errors.contains("Error: Please provide a valid email address."));
     }
+
 }
 

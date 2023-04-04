@@ -7,6 +7,7 @@ import pl.poligonjava.pages.MainPage;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class LoginTest extends BaseTest{
 
@@ -28,4 +29,17 @@ public class LoginTest extends BaseTest{
 
         Assert.assertEquals(username, greetingParam.getText());
     }
+
+    @Test
+    public void registerEmptyPass() throws FileNotFoundException {
+        String email = ReadFile.readFile();
+        List<String> errors = new MainPage(driver)
+                .myAccountClick()
+                .loginDataFill(email, "")
+                .loginErrorClick()
+                .getErrors();
+
+        Assert.assertTrue(errors.contains("ERROR: The password field is empty."));
+    }
+
 }
