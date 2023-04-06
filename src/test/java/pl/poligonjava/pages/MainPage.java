@@ -14,6 +14,9 @@ public class MainPage {
     @FindBy (linkText = "My account")
     private WebElement myAccLink;
 
+    @FindBy (linkText = "Shop")
+    private WebElement shopLink;
+
     @FindBy (id = "nimble_name317664225")
     private WebElement formDataName;
 
@@ -40,6 +43,11 @@ public class MainPage {
     public AccountPage myAccountClick() {
         myAccLink.click();
         return new AccountPage(driver);
+    }
+
+    public ProductsPage shopClick() {
+        shopLink.click();
+        return new ProductsPage(driver);
     }
 
     public MainPage fillContactForm(String name, String email, String message) {
