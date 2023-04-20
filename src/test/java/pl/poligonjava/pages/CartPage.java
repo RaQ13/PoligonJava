@@ -1,11 +1,14 @@
 package pl.poligonjava.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import pl.poligonjava.utils.SeleniumHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,6 +40,8 @@ public class CartPage {
     }
 
     public OrdersPage proceedBtnClick() {
+        SeleniumHelper.waitForElementToBeClicable(driver, proceedBtn);
+        SeleniumHelper.scrollDown(driver);
         proceedBtn.click();
         return new OrdersPage(driver);
     }

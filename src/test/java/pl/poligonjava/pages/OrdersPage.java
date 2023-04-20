@@ -1,19 +1,24 @@
 package pl.poligonjava.pages;
 
+import org.apache.xpath.operations.Or;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pl.poligonjava.models.Customer;
 import pl.poligonjava.utils.SeleniumHelper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class OrdersPage {
 
     protected WebDriver driver;
+
+    public Float sum = (float) 0;
 
     @FindBy(name = "billing_first_name")
     private WebElement firstNameInput;
@@ -54,12 +59,25 @@ public class OrdersPage {
     @FindBy(xpath = "//td[@class='product-name']")
     private List<WebElement> productsList;
 
+    @FindBy(xpath = "//h1[text()='Orders']")
+    private WebElement orderHeading;
+
+    @FindBy(xpath = "//td[@class='product-total']")
+    private List<WebElement> productTotal;
+
+    @FindBy(xpath = "//tr[@class='order-total']//span[@class='woocommerce-Price-amount amount']")
+    private WebElement orderTotal;
+
+    @FindBy(id = "place_order")
+    private WebElement placeOrderBtn;
+
     public OrdersPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
     public OrdersPage fillForm(Customer customer) {
+        SeleniumHelper.waitForElemetToBeVisible(driver, orderHeading);
         firstNameInput.sendKeys(customer.getFirstName());
         lastNameInput.sendKeys(customer.getLastName());
         commentsInput.sendKeys(customer.getComments());
@@ -70,8 +88,60 @@ public class OrdersPage {
         apartmentInput.sendKeys(customer.getStreetApartmentAddress());
         postalCodeInput.sendKeys(customer.getPostalCode());
         cityInput.sendKeys(customer.getCity());
-        phoneInput.sendKeys(customer.getCity());
+        phoneInput.sendKeys(customer.getPhone());
         emailInput.sendKeys(customer.getEmail());
+        SeleniumHelper.scrollDown(driver);
         return this;
+    }
+    public OrdersPage checkProducts() {
+
+        try {
+            List<String> productsListNames = productsList.stream().map(el -> {
+                return el.getText().replace(subStringFromElement(el.getText(), "×"), "").trim();
+            }).collect(Collectors.toList());
+            List<String> productsQuanity = productsList.stream().map(el -> subStringFromElement(el.getText(), "×").replace("× ", "")).collect(Collectors.toList());
+
+            Assert.assertTrue(productsListNames.contains("BDD Cucumber"));
+            Assert.assertTrue(productsListNames.contains("GIT basics"));
+            Assert.assertTrue(productsListNames.contains("Java Selenium WebDriver"));
+
+            productsQuanity.forEach(el-> {Assert.assertTrue(el.contains("1"));});
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            List<String> productsListNames = productsList.stream().map(el -> {
+                return el.getText().replace(subStringFromElement(el.getText(), "×"), "").trim();
+            }).collect(Collectors.toList());
+            List<String> productsQuanity = productsList.stream().map(el -> subStringFromElement(el.getText(), "×").replace("× ", "")).collect(Collectors.toList());
+
+            Assert.assertTrue(productsListNames.contains("BDD Cucumber"));
+            Assert.assertTrue(productsListNames.contains("GIT basics"));
+            Assert.assertTrue(productsListNames.contains("Java Selenium WebDriver"));
+
+            productsQuanity.forEach(el-> {Assert.assertTrue(el.contains("1"));});
+        }
+        return this;
+    }
+
+    public OrdersPage checkPayment() {
+        List<Float> fromProductTotal = productTotal.stream().map(el -> {
+            return Float.parseFloat(el.getText().replace(subStringFromElement(el.getText(), "zł"), "").trim().replace(",", "."));
+        }).collect(Collectors.toList());
+        fromProductTotal.forEach(el-> this.sum+= el);
+        Float totalSum = Float.parseFloat(orderTotal.getText().replace(" zł", "").replace(",", "."));
+
+        Assert.assertEquals(totalSum, sum);
+        return this;
+    }
+
+    public OrdersDetails placeOrderClick() {
+        SeleniumHelper.scrollDown(driver);
+        SeleniumHelper.waitForElementToBeClicable(driver, placeOrderBtn);
+        placeOrderBtn.click();
+        return new OrdersDetails(driver);
+    }
+
+    public String subStringFromElement(String el, String cut) {
+        return el.substring(el.indexOf(cut));
     }
 }

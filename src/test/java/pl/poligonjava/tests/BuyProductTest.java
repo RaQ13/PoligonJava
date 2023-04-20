@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pl.poligonjava.models.Customer;
 import pl.poligonjava.pages.CartPage;
 import pl.poligonjava.pages.MainPage;
+import pl.poligonjava.pages.OrdersPage;
 
 public class BuyProductTest extends BaseTest{
 
@@ -17,6 +18,9 @@ public class BuyProductTest extends BaseTest{
                 .cartLinkClick()
                 .checkAreAllProducts()
                 .proceedBtnClick()
-                .fillForm(customer);
+                .fillForm(customer)
+                .checkProducts()
+                .checkPayment()
+                .placeOrderClick();
     }
 }

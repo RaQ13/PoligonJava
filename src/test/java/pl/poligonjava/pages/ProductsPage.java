@@ -63,6 +63,7 @@ public class ProductsPage {
     }
 
     public CartPage cartLinkClick() {
+        SeleniumHelper.waitForElemetToBeVisible(driver, cartLink);
         String productsInCart = countProductsInCart.stream().filter(WebElement::isDisplayed).toList().get(0).getText();
         if (addToCartLinks.size() == Integer.parseInt(productsInCart)) {
             cartLink.click();
