@@ -1,15 +1,22 @@
 package pl.poligonjava.tests;
 
+import org.checkerframework.checker.units.qual.C;
 import org.testng.annotations.Test;
+import pl.poligonjava.models.Customer;
+import pl.poligonjava.pages.CartPage;
 import pl.poligonjava.pages.MainPage;
 
 public class BuyProductTest extends BaseTest{
 
     @Test
     public void buyAllProducts() {
+        Customer customer = new Customer();
         new MainPage(driver)
                 .shopClick()
                 .addAllProducts()
-                .cartLinkClick();
+                .cartLinkClick()
+                .checkAreAllProducts()
+                .proceedBtnClick()
+                .fillForm(customer);
     }
 }
