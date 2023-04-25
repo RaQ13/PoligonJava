@@ -97,9 +97,9 @@ public class OrdersPage {
 
         try {
             List<String> productsListNames = productsList.stream().map(el -> {
-                return el.getText().replace(subStringFromElement(el.getText(), "×"), "").trim();
+                return el.getText().replace(SeleniumHelper.subStringFromElement(el.getText(), "×"), "").trim();
             }).collect(Collectors.toList());
-            List<String> productsQuanity = productsList.stream().map(el -> subStringFromElement(el.getText(), "×").replace("× ", "")).collect(Collectors.toList());
+            List<String> productsQuanity = productsList.stream().map(el -> SeleniumHelper.subStringFromElement(el.getText(), "×").replace("× ", "")).collect(Collectors.toList());
 
             Assert.assertTrue(productsListNames.contains("BDD Cucumber"));
             Assert.assertTrue(productsListNames.contains("GIT basics"));
@@ -110,9 +110,9 @@ public class OrdersPage {
         catch(org.openqa.selenium.StaleElementReferenceException ex)
         {
             List<String> productsListNames = productsList.stream().map(el -> {
-                return el.getText().replace(subStringFromElement(el.getText(), "×"), "").trim();
+                return el.getText().replace(SeleniumHelper.subStringFromElement(el.getText(), "×"), "").trim();
             }).collect(Collectors.toList());
-            List<String> productsQuanity = productsList.stream().map(el -> subStringFromElement(el.getText(), "×").replace("× ", "")).collect(Collectors.toList());
+            List<String> productsQuanity = productsList.stream().map(el -> SeleniumHelper.subStringFromElement(el.getText(), "×").replace("× ", "")).collect(Collectors.toList());
 
             Assert.assertTrue(productsListNames.contains("BDD Cucumber"));
             Assert.assertTrue(productsListNames.contains("GIT basics"));
@@ -125,7 +125,7 @@ public class OrdersPage {
 
     public OrdersPage checkPayment() {
         List<Float> fromProductTotal = productTotal.stream().map(el -> {
-            return Float.parseFloat(el.getText().replace(subStringFromElement(el.getText(), "zł"), "").trim().replace(",", "."));
+            return Float.parseFloat(el.getText().replace(SeleniumHelper.subStringFromElement(el.getText(), "zł"), "").trim().replace(",", "."));
         }).collect(Collectors.toList());
         fromProductTotal.forEach(el-> this.sum+= el);
         Float totalSum = Float.parseFloat(orderTotal.getText().replace(" zł", "").replace(",", "."));
@@ -137,11 +137,14 @@ public class OrdersPage {
     public OrdersDetails placeOrderClick() {
         SeleniumHelper.scrollDown(driver);
         SeleniumHelper.waitForElementToBeClicable(driver, placeOrderBtn);
-        placeOrderBtn.click();
+        try {
+            placeOrderBtn.click();
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+            placeOrderBtn.click();
+        }
+
         return new OrdersDetails(driver);
     }
 
-    public String subStringFromElement(String el, String cut) {
-        return el.substring(el.indexOf(cut));
-    }
+
 }

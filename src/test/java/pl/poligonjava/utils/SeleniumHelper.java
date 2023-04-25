@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Objects;
 
 public class SeleniumHelper {
 
@@ -37,6 +36,10 @@ public class SeleniumHelper {
     public static void scrollDown(WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,500)", "");
+    }
+
+    public static String subStringFromElement(String el, String cut) {
+        return el.substring(el.indexOf(cut));
     }
 
     public static void stepBack(WebDriver driver) {

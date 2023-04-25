@@ -16,8 +16,8 @@ public class BaseTest {
         driver.get("http://seleniumdemo.com");
     }
 
-//    @AfterMethod
-//    public void teardown() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void teardown() {
+        driver.quit();
+    }
 }

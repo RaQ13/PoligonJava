@@ -21,6 +21,7 @@ public class BuyProductTest extends BaseTest{
                 .fillForm(customer)
                 .checkProducts()
                 .checkPayment()
-                .placeOrderClick();
+                .placeOrderClick()
+                .checkOrderDetails();
     }
 }
