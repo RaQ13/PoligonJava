@@ -6,9 +6,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverFactory {
 
+    private static WebDriver driver;
     public static WebDriver getDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        return new ChromeDriver(options);
+        if (driver==null) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--remote-allow-origins=*");
+            driver = new ChromeDriver(options);
+        }
+        return driver;
     }
 }

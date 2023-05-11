@@ -1,5 +1,7 @@
 package pl.poligonjava.pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.apache.xpath.operations.Or;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 public class OrdersPage {
 
     protected WebDriver driver;
+
+    protected ExtentTest test;
 
     public Float sum = (float) 0;
 
@@ -71,9 +75,10 @@ public class OrdersPage {
     @FindBy(id = "place_order")
     private WebElement placeOrderBtn;
 
-    public OrdersPage(WebDriver driver) {
+    public OrdersPage(WebDriver driver, ExtentTest test) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.test = test;
     }
 
     public OrdersPage fillForm(Customer customer) {
@@ -91,6 +96,7 @@ public class OrdersPage {
         phoneInput.sendKeys(customer.getPhone());
         emailInput.sendKeys(customer.getEmail());
         SeleniumHelper.scrollDown(driver);
+        test.log(Status.PASS, "Form Filled With Customer Data");
         return this;
     }
     public OrdersPage checkProducts() {
@@ -106,6 +112,7 @@ public class OrdersPage {
             Assert.assertTrue(productsListNames.contains("Java Selenium WebDriver"));
 
             productsQuanity.forEach(el-> {Assert.assertTrue(el.contains("1"));});
+            test.log(Status.PASS, "Products Checked");
         }
         catch(org.openqa.selenium.StaleElementReferenceException ex)
         {
@@ -119,6 +126,7 @@ public class OrdersPage {
             Assert.assertTrue(productsListNames.contains("Java Selenium WebDriver"));
 
             productsQuanity.forEach(el-> {Assert.assertTrue(el.contains("1"));});
+            test.log(Status.PASS, "Products Checked");
         }
         return this;
     }
@@ -131,6 +139,7 @@ public class OrdersPage {
         Float totalSum = Float.parseFloat(orderTotal.getText().replace(" zł", "").replace(",", "."));
 
         Assert.assertEquals(totalSum, sum);
+        test.log(Status.PASS, "Payment Checked");
         return this;
     }
 
@@ -139,11 +148,13 @@ public class OrdersPage {
         SeleniumHelper.waitForElementToBeClicable(driver, placeOrderBtn);
         try {
             placeOrderBtn.click();
+            test.log(Status.PASS, "Place Order Clicked");
         } catch (org.openqa.selenium.StaleElementReferenceException ex) {
             placeOrderBtn.click();
+            test.log(Status.PASS, "Place Order Clicked");
         }
 
-        return new OrdersDetails(driver);
+        return new OrdersDetails(driver, test);
     }
 
 

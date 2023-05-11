@@ -1,5 +1,6 @@
 package pl.poligonjava.tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
@@ -16,13 +17,14 @@ public class LoginTest extends BaseTest{
 
     @Test
     public void loginTest() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Login Test");
 
         String usernameEmail = ReadFile.readFile();
         this.pass = usernameEmail;
         String username = usernameEmail.replace("@gmail.com", "");
 
         WebElement greetingParam =
-                new MainPage(driver)
+                new MainPage(driver, test)
                 .myAccountClick()
                 .loginDataFill(usernameEmail, pass)
                 .loginClick()
@@ -32,9 +34,10 @@ public class LoginTest extends BaseTest{
     }
 
     @Test
-    public void registerEmptyPass() throws FileNotFoundException {
+    public void loginEmptyPass() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Login Empty Pass Test");
         String email = ReadFile.readFile();
-        List<String> errors = new MainPage(driver)
+        List<String> errors = new MainPage(driver, test)
                 .myAccountClick()
                 .loginDataFill(email, "")
                 .loginErrorClick()
@@ -44,9 +47,10 @@ public class LoginTest extends BaseTest{
     }
 
     @Test
-    public void registerInvalidPass() throws FileNotFoundException {
+    public void loginInvalidPass() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Login Invalid Password Test");
         String email = ReadFile.readFile();
-        List<String> errors = new MainPage(driver)
+        List<String> errors = new MainPage(driver, test)
                 .myAccountClick()
                 .loginDataFill(email, "random")
                 .loginErrorClick()

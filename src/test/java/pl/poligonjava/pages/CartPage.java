@@ -1,5 +1,7 @@
 package pl.poligonjava.pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,15 +21,18 @@ public class CartPage {
 
     protected WebDriver driver;
 
+    protected ExtentTest test;
+
     @FindBy(xpath = "//td[@class='product-name']")
     private List<WebElement> productsListNames;
 
     @FindBy(xpath = "//a[contains(text(), 'Proceed to checkout')]")
     private WebElement proceedBtn;
 
-    public CartPage(WebDriver driver) {
+    public CartPage(WebDriver driver, ExtentTest test) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.test = test;
     }
 
     public CartPage checkAreAllProducts() {
@@ -36,6 +41,7 @@ public class CartPage {
         Assert.assertTrue(productsNames.contains("Java Selenium WebDriver"));
         Assert.assertTrue(productsNames.contains("GIT basics"));
         Assert.assertTrue(productsNames.contains("BDD Cucumber"));
+        test.log(Status.PASS, "All Products Checked");
         return this;
     }
 
@@ -43,6 +49,7 @@ public class CartPage {
         SeleniumHelper.waitForElementToBeClicable(driver, proceedBtn);
         SeleniumHelper.scrollDown(driver);
         proceedBtn.click();
-        return new OrdersPage(driver);
+        test.log(Status.PASS, "Proceed To Checkout Button Clicked");
+        return new OrdersPage(driver, test);
     }
 }

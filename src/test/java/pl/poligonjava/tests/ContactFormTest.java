@@ -1,5 +1,6 @@
 package pl.poligonjava.tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,10 +14,11 @@ public class ContactFormTest extends BaseTest{
 
     @Test
     public void submitForm() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Contact form test Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
 
-        String respond = new MainPage(driver)
+        String respond = new MainPage(driver, test)
                 .fillContactForm(name, email, "random message")
                 .submitContactForm()
                 .getSubmitRespond().getText();
@@ -26,9 +28,10 @@ public class ContactFormTest extends BaseTest{
 
     @Test
     public void submitFormInvalidEmail() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Submit invalid Email Test Test");
         String name = ReadFile.readFile().replace("@gmail.com", "");
 
-        String respond = new MainPage(driver)
+        String respond = new MainPage(driver, test)
                 .fillContactForm(name, name, "random message")
                 .submitContactForm()
                 .getSubmitRespond().getText();

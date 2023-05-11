@@ -1,16 +1,21 @@
 package pl.poligonjava.pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pl.poligonjava.utils.SeleniumHelper;
 
+import javax.naming.ldap.ExtendedRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductsPage {
 
     protected WebDriver driver;
+
+    protected ExtentTest test;
 
     @FindBy(xpath = "//a[text()='Add to cart']")
     List<WebElement> addToCartLinks;
@@ -21,9 +26,10 @@ public class ProductsPage {
     @FindBy(xpath = "//sup[@class='count czr-wc-count']")
     private List<WebElement> countProductsInCart;
 
-    public ProductsPage(WebDriver driver) {
+    public ProductsPage(WebDriver driver, ExtentTest test) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.test = test;
     }
 
     /** Dodaje wszystkie produkty do koszyka */
@@ -38,6 +44,7 @@ public class ProductsPage {
                     SeleniumHelper.waitForPseudoElement(driver, getPseudoelem(uniqueID));
                 });
 
+        test.log(Status.PASS, "All Produtcts Added");
         return this;
     }
     /** Sprawdza content pseudoelementu */
@@ -45,7 +52,9 @@ public class ProductsPage {
         String script = "return window.getComputedStyle(document.querySelector('a.add_to_cart_button[data-product_id=\""+ uniqueId + "\"]'), ':after').getPropertyValue('content')";
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String pseudoElem = (String) js.executeScript(script);
-        if(pseudoElem != "none") {return true;} else {return false;}
+        if(pseudoElem != "none") {
+            test.log(Status.PASS, "Pseudeo Elem Appeared");
+            return true; } else {return false;}
     }
 
     /** Klika na add to cart z delikatnym opóźnieniem */
@@ -60,6 +69,7 @@ public class ProductsPage {
                 }
             }
         });
+        test.log(Status.PASS, "Add To Cart Clicked");
     }
 
     public CartPage cartLinkClick() {
@@ -68,6 +78,7 @@ public class ProductsPage {
         if (addToCartLinks.size() == Integer.parseInt(productsInCart)) {
             cartLink.click();
         }
-        return new CartPage(driver);
+        test.log(Status.PASS, "Cart Link Clicked");
+        return new CartPage(driver, test);
     }
 }

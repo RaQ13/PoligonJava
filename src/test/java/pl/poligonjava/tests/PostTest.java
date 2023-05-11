@@ -1,5 +1,6 @@
 package pl.poligonjava.tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.remote.Browser;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,11 +14,12 @@ public class PostTest extends BaseTest{
 
     @Test
     public void submitFirstPostComment() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Submit First Post Comment Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
         String url = driver.getCurrentUrl();
 
-        new MainPage(driver)
+        new MainPage(driver, test)
                 .getFirstPost()
                 .fillCommentForm(email, name, email, url)
                 .submitCommentForm();
@@ -25,11 +27,12 @@ public class PostTest extends BaseTest{
 
     @Test
     public void submitDuplicateFirstPostComment() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Duplicate First Comment Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
         String url = driver.getCurrentUrl();
 
-        String errorMsg = new MainPage(driver)
+        String errorMsg = new MainPage(driver, test)
                 .getFirstPost()
                 .fillCommentForm(email, name, email, url)
                 .submitCommentForm()
@@ -41,11 +44,12 @@ public class PostTest extends BaseTest{
 
     @Test
     public void submitSecondPostComment() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Second Post Comment Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
         String url = driver.getCurrentUrl();
 
-        new MainPage(driver)
+        new MainPage(driver, test)
                 .getSecondPost()
                 .fillCommentForm(email, name, email, url)
                 .submitCommentForm();
@@ -53,11 +57,12 @@ public class PostTest extends BaseTest{
 
     @Test
     public void submitDuplicateSecondPostComment() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Submit Duplicate Second Post Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
         String url = driver.getCurrentUrl();
 
-        String errorMsg = new MainPage(driver)
+        String errorMsg = new MainPage(driver, test)
                 .getSecondPost()
                 .fillCommentForm(email, name, email, url)
                 .submitCommentForm()

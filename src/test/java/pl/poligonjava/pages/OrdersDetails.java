@@ -1,5 +1,7 @@
 package pl.poligonjava.pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class OrdersDetails {
 
     protected WebDriver driver;
+    protected ExtentTest test;
     private Float sum = (float) 0;
     @FindBy(xpath = "//h1[@class='entry-title']")
     private WebElement orderDetailsHeading;
@@ -39,9 +42,10 @@ public class OrdersDetails {
     @FindBy(xpath = "//th[text()='Total:']/following-sibling::td")
     private WebElement orderTotal;
 
-    public OrdersDetails(WebDriver driver) {
+    public OrdersDetails(WebDriver driver, ExtentTest test) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.test = test;
     }
 
     public void checkOrderDetails() {
@@ -49,6 +53,7 @@ public class OrdersDetails {
         checkQuanityOfProducts();
         checkCustomerNote();
         checkTotal();
+        bug();
     }
 
     public void checkOrderProductsNames() {
@@ -60,17 +65,19 @@ public class OrdersDetails {
         Assert.assertTrue(products.contains("BDD Cucumber"));
         Assert.assertTrue(products.contains("GIT basics"));
         Assert.assertTrue(products.contains("Java Selenium WebDriver"));
+        test.log(Status.PASS, "Products Names On Order Details Checked");
 
     }
 
     public void checkQuanityOfProducts() {
         List<String> qty = productsQty.stream().map(WebElement::getText).collect(Collectors.toList());
         qty.forEach(el -> {Assert.assertTrue(el.contains("× 1"));});
-
+        test.log(Status.PASS, "Quanity Of On Order Details Checked");
     }
 
     public void checkCustomerNote() {
         Assert.assertEquals(customerNote.getText(), new Customer().getComments());
+        test.log(Status.PASS, "Customer Comment On Order Details Checked");
     }
 
     public void checkTotal() {
@@ -83,5 +90,10 @@ public class OrdersDetails {
 
         Assert.assertEquals(orderOverviewTotal.getText(), total);
         Assert.assertEquals(orderTotal.getText(), total);
+        test.log(Status.PASS, "Total Price On Order Details Checked");
+    }
+    public void bug() {
+        WebElement x = driver.findElement(By.xpath("//x"));
+        x.click();
     }
 }

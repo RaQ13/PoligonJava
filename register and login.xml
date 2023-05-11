@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="User Register Login Suite">
+    <listeners>
+        <listener class-name="pl.poligonjava.utils.Listener"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="C:\Users\Marcin Najwer\Desktop\Tester\Java\Travels\poligonJava">
+        <classes>
+            <class name="pl.poligonjava.tests.RegisterTest">
+                <methods>
+                    <include name="RegisterValidData"/>
+                    <include name="RegisterExistingEmail"/>
+                    <include name="RegisterInvalidEmail"/>
+                </methods>
+            </class>
+            <class name="pl.poligonjava.tests.LoginTest">
+                <methods>
+                    <include name="loginTest"/>
+                    <include name="loginEmptyPass"/>
+                    <include name="loginInvalidPass"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

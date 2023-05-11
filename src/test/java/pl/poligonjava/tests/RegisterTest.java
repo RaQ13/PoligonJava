@@ -1,5 +1,6 @@
 package pl.poligonjava.tests;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
@@ -26,7 +27,7 @@ public class RegisterTest extends BaseTest {
     protected String pass;
     @Test
     public void RegisterValidData() throws IOException {
-
+        ExtentTest test = extentReports.createTest("Register Valid Data Test");
         int random = (int) (Math.random() * 1000);
         String email = "przyklad" + random + "@gmail.com";
         this.pass = email; //hasło takie samo jak email
@@ -36,7 +37,7 @@ public class RegisterTest extends BaseTest {
         String line = ReadFile.readFile();
         String username = line.replace("@gmail.com", "");
 
-        WebElement greetingParam = new MainPage(driver)
+        WebElement greetingParam = new MainPage(driver, test)
                 .myAccountClick()
                 .registerDataFill(email, pass)
                 .registerClick()
@@ -47,9 +48,10 @@ public class RegisterTest extends BaseTest {
 
     @Test
     public void RegisterExistingEmail() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Register Existing Email Test");
         String email = ReadFile.readFile();
 
-        List<String> errors = new MainPage(driver)
+        List<String> errors = new MainPage(driver, test)
                 .myAccountClick()
                 .registerDataFill(email, "")
                 .registerErrorClick()
@@ -59,10 +61,11 @@ public class RegisterTest extends BaseTest {
 
     @Test
     public void RegisterInvalidEmail() throws FileNotFoundException {
+        ExtentTest test = extentReports.createTest("Register Valid Data Test");
         String email = ReadFile.readFile();
         String invalidEmail = email.replace(".com", "");
 
-        List<String> errors = new MainPage(driver)
+        List<String> errors = new MainPage(driver, test)
                 .myAccountClick()
                 .registerDataFill(invalidEmail, "jakieś hasło")
                 .registerErrorClick()
