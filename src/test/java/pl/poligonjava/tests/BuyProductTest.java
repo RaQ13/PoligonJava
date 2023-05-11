@@ -19,9 +19,9 @@ import java.io.IOException;
 @Listeners(value = {Listener.class})
 
 public class BuyProductTest extends BaseTest{
-
     @Test
     public void buyAllProducts() throws IOException {
+        ScreenShot screenShot = new ScreenShot(driver);
         ExtentTest test = extentReports.createTest("Buy All products");
         Customer customer = new Customer();
         new MainPage(driver, test)

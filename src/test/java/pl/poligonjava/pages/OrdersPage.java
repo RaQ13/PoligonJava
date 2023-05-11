@@ -10,8 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.poligonjava.models.Customer;
+import pl.poligonjava.utils.ScreenShot;
 import pl.poligonjava.utils.SeleniumHelper;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,8 @@ public class OrdersPage {
     protected WebDriver driver;
 
     protected ExtentTest test;
+
+    public ScreenShot screenShot = new ScreenShot(driver);
 
     public Float sum = (float) 0;
 
@@ -81,7 +85,7 @@ public class OrdersPage {
         this.test = test;
     }
 
-    public OrdersPage fillForm(Customer customer) {
+    public OrdersPage fillForm(Customer customer) throws IOException {
         SeleniumHelper.waitForElemetToBeVisible(driver, orderHeading);
         firstNameInput.sendKeys(customer.getFirstName());
         lastNameInput.sendKeys(customer.getLastName());
@@ -96,10 +100,10 @@ public class OrdersPage {
         phoneInput.sendKeys(customer.getPhone());
         emailInput.sendKeys(customer.getEmail());
         SeleniumHelper.scrollDown(driver);
-        test.log(Status.PASS, "Form Filled With Customer Data");
+        test.log(Status.PASS, "Form Filled With Customer Data", screenShot.getScreenshotMethodName("pass", driver));
         return this;
     }
-    public OrdersPage checkProducts() {
+    public OrdersPage checkProducts() throws IOException {
 
         try {
             List<String> productsListNames = productsList.stream().map(el -> {
@@ -112,7 +116,7 @@ public class OrdersPage {
             Assert.assertTrue(productsListNames.contains("Java Selenium WebDriver"));
 
             productsQuanity.forEach(el-> {Assert.assertTrue(el.contains("1"));});
-            test.log(Status.PASS, "Products Checked");
+            test.log(Status.PASS, "Products Checked", screenShot.getScreenshotMethodName("pass", driver));
         }
         catch(org.openqa.selenium.StaleElementReferenceException ex)
         {
@@ -126,12 +130,14 @@ public class OrdersPage {
             Assert.assertTrue(productsListNames.contains("Java Selenium WebDriver"));
 
             productsQuanity.forEach(el-> {Assert.assertTrue(el.contains("1"));});
-            test.log(Status.PASS, "Products Checked");
+            test.log(Status.PASS, "Products Checked", screenShot.getScreenshotMethodName("pass", driver));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return this;
     }
 
-    public OrdersPage checkPayment() {
+    public OrdersPage checkPayment() throws IOException {
         List<Float> fromProductTotal = productTotal.stream().map(el -> {
             return Float.parseFloat(el.getText().replace(SeleniumHelper.subStringFromElement(el.getText(), "zł"), "").trim().replace(",", "."));
         }).collect(Collectors.toList());
@@ -139,19 +145,21 @@ public class OrdersPage {
         Float totalSum = Float.parseFloat(orderTotal.getText().replace(" zł", "").replace(",", "."));
 
         Assert.assertEquals(totalSum, sum);
-        test.log(Status.PASS, "Payment Checked");
+        test.log(Status.PASS, "Payment Checked", screenShot.getScreenshotMethodName("pass", driver));
         return this;
     }
 
-    public OrdersDetails placeOrderClick() {
+    public OrdersDetails placeOrderClick() throws IOException {
         SeleniumHelper.scrollDown(driver);
         SeleniumHelper.waitForElementToBeClicable(driver, placeOrderBtn);
         try {
             placeOrderBtn.click();
-            test.log(Status.PASS, "Place Order Clicked");
+            test.log(Status.PASS, "Place Order Clicked", screenShot.getScreenshotMethodName("pass", driver));
         } catch (org.openqa.selenium.StaleElementReferenceException ex) {
             placeOrderBtn.click();
-            test.log(Status.PASS, "Place Order Clicked");
+            test.log(Status.PASS, "Place Order Clicked", screenShot.getScreenshotMethodName("pass", driver));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         return new OrdersDetails(driver, test);

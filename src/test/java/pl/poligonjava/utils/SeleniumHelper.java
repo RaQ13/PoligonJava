@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Optional;
 
 public class SeleniumHelper {
 
@@ -51,4 +52,13 @@ public class SeleniumHelper {
         driver.navigate().back();
     }
 
+    public static String getMethodName() {
+        final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
+        return ste[4].getMethodName(); // poziom zagnieżdżenia
+    }
+
+    public void bug(WebDriver driver) {
+        WebElement x = driver.findElement(By.xpath("//x"));
+        x.click();
+    }
 }

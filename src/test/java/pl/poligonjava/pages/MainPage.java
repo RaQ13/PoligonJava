@@ -17,7 +17,7 @@ public class MainPage {
     private WebDriver driver;
     private ExtentTest test;
 
-    public ScreenShot screen = new ScreenShot(driver);
+    public ScreenShot screenShot = new ScreenShot(driver);
     @FindBy (linkText = "My account")
     private WebElement myAccLink;
 
@@ -55,39 +55,39 @@ public class MainPage {
 
     public ProductsPage shopClick() throws IOException {
         shopLink.click();
-        test.log(Status.PASS, "Shop Link Clicked", screen.getScreenshot("pass", driver));
+        test.log(Status.PASS, "Shop Link Clicked", screenShot.getScreenshotMethodName("pass", driver));
         return new ProductsPage(driver, test);
     }
 
-    public MainPage fillContactForm(String name, String email, String message) {
+    public MainPage fillContactForm(String name, String email, String message) throws IOException {
         formDataName.sendKeys(name);
         formDataEmail.sendKeys(email);
         formDataMessage.sendKeys(message);
-        test.log(Status.PASS, "Contact Form Filled With Data");
+        test.log(Status.PASS, "Contact Form Filled With Data", screenShot.getScreenshotMethodName("pass", driver));
         return this;
     }
 
-    public MainPage submitContactForm() {
+    public MainPage submitContactForm() throws IOException {
         submitFormBtn.click();
-        test.log(Status.PASS, "Contact Form Submitted");
+        test.log(Status.PASS, "Contact Form Submitted", screenShot.getScreenshotMethodName("pass", driver));
         return this;
     }
 
-    public WebElement getSubmitRespond() {
+    public WebElement getSubmitRespond() throws IOException {
         SeleniumHelper.waitForElemetToBeVisible(driver, formRespondParam);
-        test.log(Status.PASS, "Submit Respond Received");
+        test.log(Status.PASS, "Submit Respond Received", screenShot.getScreenshotMethodName("pass", driver));
         return formRespondParam;
     }
 
-    public PostPage getFirstPost() {
+    public PostPage getFirstPost() throws IOException {
         postsLinks.get(0).click();
-        test.log(Status.PASS, "Firts Post Found");
+        test.log(Status.PASS, "Firts Post Found", screenShot.getScreenshotMethodName("pass", driver));
         return new PostPage(driver);
     }
 
-    public PostPage getSecondPost() {
+    public PostPage getSecondPost() throws IOException {
         postsLinks.get(1).click();
-        test.log(Status.PASS, "Second Post Found");
+        test.log(Status.PASS, "Second Post Found", screenShot.getScreenshotMethodName("pass", driver));
         return new PostPage(driver);
     }
 }

@@ -10,8 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.poligonjava.models.Customer;
+import pl.poligonjava.utils.ScreenShot;
 import pl.poligonjava.utils.SeleniumHelper;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +21,9 @@ import java.util.stream.Collectors;
 public class OrdersDetails {
 
     protected WebDriver driver;
+
     protected ExtentTest test;
+    public ScreenShot screenShot = new ScreenShot(driver);
     private Float sum = (float) 0;
     @FindBy(xpath = "//h1[@class='entry-title']")
     private WebElement orderDetailsHeading;
@@ -48,15 +52,14 @@ public class OrdersDetails {
         this.test = test;
     }
 
-    public void checkOrderDetails() {
+    public void checkOrderDetails() throws IOException {
         checkOrderProductsNames();
         checkQuanityOfProducts();
         checkCustomerNote();
         checkTotal();
-        bug();
     }
 
-    public void checkOrderProductsNames() {
+    public void checkOrderProductsNames() throws IOException {
         SeleniumHelper.waitForElemetToBeVisible(driver, orderDetailsHeading);
         SeleniumHelper.waitForNotEmptyList(driver, By.xpath("//table//a"));
 
@@ -65,22 +68,22 @@ public class OrdersDetails {
         Assert.assertTrue(products.contains("BDD Cucumber"));
         Assert.assertTrue(products.contains("GIT basics"));
         Assert.assertTrue(products.contains("Java Selenium WebDriver"));
-        test.log(Status.PASS, "Products Names On Order Details Checked");
+        test.log(Status.PASS, "Products Names On Order Details Checked", screenShot.getScreenshotMethodName("pass", driver));
 
     }
 
-    public void checkQuanityOfProducts() {
+    public void checkQuanityOfProducts() throws IOException {
         List<String> qty = productsQty.stream().map(WebElement::getText).collect(Collectors.toList());
         qty.forEach(el -> {Assert.assertTrue(el.contains("× 1"));});
-        test.log(Status.PASS, "Quanity Of On Order Details Checked");
+        test.log(Status.PASS, "Quanity Of On Order Details Checked", screenShot.getScreenshotMethodName("pass", driver));
     }
 
-    public void checkCustomerNote() {
+    public void checkCustomerNote() throws IOException {
         Assert.assertEquals(customerNote.getText(), new Customer().getComments());
-        test.log(Status.PASS, "Customer Comment On Order Details Checked");
+        test.log(Status.PASS, "Customer Comment On Order Details Checked", screenShot.getScreenshotMethodName("pass", driver));
     }
 
-    public void checkTotal() {
+    public void checkTotal() throws IOException {
         List<Float> fromProductsTotal = productTotal.stream().map(element -> {
             return Float.parseFloat(element.getText().replace(SeleniumHelper.subStringFromElement(element.getText(), "zł"), "").trim().replace(",", "."));
         }).collect(Collectors.toList());
@@ -90,10 +93,6 @@ public class OrdersDetails {
 
         Assert.assertEquals(orderOverviewTotal.getText(), total);
         Assert.assertEquals(orderTotal.getText(), total);
-        test.log(Status.PASS, "Total Price On Order Details Checked");
-    }
-    public void bug() {
-        WebElement x = driver.findElement(By.xpath("//x"));
-        x.click();
+        test.log(Status.PASS, "Total Price On Order Details Checked", screenShot.getScreenshotMethodName("pass", driver));
     }
 }

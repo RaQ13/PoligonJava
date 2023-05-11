@@ -43,9 +43,29 @@ public class ScreenShot {
         }
     }
 
+    public String takeScreenshotMethodName(String status, WebDriver driver) {
+        TakesScreenshot screenshot = (TakesScreenshot) driver;
+
+        String screenName = this.path + status + "--" + SeleniumHelper.getMethodName() + "--" + getTimeStamp() + ".png";
+        File screen = screenshot.getScreenshotAs(OutputType.FILE);
+
+        try {
+            FileUtils.copyFile(screen, new File(screenName));
+            return screenName;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     //Obsługuje screenshota w htmlreporter
     public MediaEntityModelProvider getScreenshot(String status, WebDriver driver) throws IOException {
         String pathTo = takeScreenshot(status, driver);
         return MediaEntityBuilder.createScreenCaptureFromPath(pathTo).build();
     }
+
+    public MediaEntityModelProvider getScreenshotMethodName(String status, WebDriver driver) throws IOException {
+        String pathTo = takeScreenshotMethodName(status, driver);
+        return MediaEntityBuilder.createScreenCaptureFromPath(pathTo).build();
+    }
+
 }

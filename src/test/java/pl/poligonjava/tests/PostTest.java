@@ -9,11 +9,12 @@ import pl.poligonjava.utils.SeleniumHelper;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class PostTest extends BaseTest{
 
     @Test
-    public void submitFirstPostComment() throws FileNotFoundException {
+    public void submitFirstPostComment() throws IOException {
         ExtentTest test = extentReports.createTest("Submit First Post Comment Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
@@ -26,7 +27,7 @@ public class PostTest extends BaseTest{
     }
 
     @Test
-    public void submitDuplicateFirstPostComment() throws FileNotFoundException {
+    public void submitDuplicateFirstPostComment() throws IOException {
         ExtentTest test = extentReports.createTest("Duplicate First Comment Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
@@ -43,7 +44,7 @@ public class PostTest extends BaseTest{
     }
 
     @Test
-    public void submitSecondPostComment() throws FileNotFoundException {
+    public void submitSecondPostComment() throws IOException {
         ExtentTest test = extentReports.createTest("Second Post Comment Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
@@ -56,7 +57,7 @@ public class PostTest extends BaseTest{
     }
 
     @Test
-    public void submitDuplicateSecondPostComment() throws FileNotFoundException {
+    public void submitDuplicateSecondPostComment() throws IOException {
         ExtentTest test = extentReports.createTest("Submit Duplicate Second Post Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");

@@ -9,11 +9,12 @@ import pl.poligonjava.utils.SeleniumHelper;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ContactFormTest extends BaseTest{
 
     @Test
-    public void submitForm() throws FileNotFoundException {
+    public void submitForm() throws IOException {
         ExtentTest test = extentReports.createTest("Contact form test Test");
         String email = ReadFile.readFile();
         String name = email.replace("@gmail.com", "");
@@ -27,7 +28,7 @@ public class ContactFormTest extends BaseTest{
     }
 
     @Test
-    public void submitFormInvalidEmail() throws FileNotFoundException {
+    public void submitFormInvalidEmail() throws IOException {
         ExtentTest test = extentReports.createTest("Submit invalid Email Test Test");
         String name = ReadFile.readFile().replace("@gmail.com", "");
 
