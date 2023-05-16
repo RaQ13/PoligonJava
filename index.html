@@ -46,7 +46,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>May 16, 2023 11:11:53 AM</span>
+                    <span class='label suite-start-time blue darken-3'>May 16, 2023 11:32:30 AM</span>
 				</a>
 			</li>
 			<li>
@@ -71,7 +71,8 @@
 					<i class='material-icons'>warning</i> Status
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
-										<li class='divider'></li>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
 			</div>
@@ -129,6 +130,20 @@
 			</div>
 		</div>
 		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>15</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
 		
 	</div>
 </div>
@@ -143,15 +158,53 @@
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>Register Existing Email Test</span>
-						<span class='test-time'>May 16, 2023 11:11:57 AM</span>
+						<span class='test-time'>May 16, 2023 11:32:33 AM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 16, 2023 11:11:57 AM</span>
-	<span class='label end-time'>May 16, 2023 11:11:57 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+	<span class='label start-time'>May 16, 2023 11:32:33 AM</span>
+	<span class='label end-time'>May 16, 2023 11:32:36 AM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 2s+748ms</span>
 </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:35 AM</td>
+					<td class='step-details'>My Account Link Clicked<img data-featherlight='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-35.png' width='10%' src='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-35.png' data-src='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-35.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:35 AM</td>
+					<td class='step-details'>Register Form Filled<img data-featherlight='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-35.png' width='10%' src='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-35.png' data-src='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-35.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:36 AM</td>
+					<td class='step-details'>Register Button Error Clicked<img data-featherlight='src/test/resources/screenshots/pass--registerErrorClick--2023-05-16--11-32-36.png' width='10%' src='src/test/resources/screenshots/pass--registerErrorClick--2023-05-16--11-32-36.png' data-src='src/test/resources/screenshots/pass--registerErrorClick--2023-05-16--11-32-36.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:36 AM</td>
+					<td class='step-details'>Errors Displayed<img data-featherlight='src/test/resources/screenshots/pass--RegisterExistingEmail--2023-05-16--11-32-36.png' width='10%' src='src/test/resources/screenshots/pass--RegisterExistingEmail--2023-05-16--11-32-36.png' data-src='src/test/resources/screenshots/pass--RegisterExistingEmail--2023-05-16--11-32-36.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:36 AM</td>
+					<td class='step-details'>Errors Equals<img data-featherlight='src/test/resources/screenshots/pass--RegisterExistingEmail--2023-05-16--11-32-36.png' width='10%' src='src/test/resources/screenshots/pass--RegisterExistingEmail--2023-05-16--11-32-36.png' data-src='src/test/resources/screenshots/pass--RegisterExistingEmail--2023-05-16--11-32-36.png'></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 					</div>
 				</li>
 				
@@ -159,15 +212,53 @@
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
 					<div class='test-heading'>
 						<span class='test-name'>Register Valid Data Test</span>
-						<span class='test-time'>May 16, 2023 11:12:01 AM</span>
+						<span class='test-time'>May 16, 2023 11:32:38 AM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 16, 2023 11:12:01 AM</span>
-	<span class='label end-time'>May 16, 2023 11:12:01 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+	<span class='label start-time'>May 16, 2023 11:32:38 AM</span>
+	<span class='label end-time'>May 16, 2023 11:32:41 AM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 2s+174ms</span>
 </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:39 AM</td>
+					<td class='step-details'>My Account Link Clicked<img data-featherlight='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-39.png' width='10%' src='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-39.png' data-src='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-39.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:40 AM</td>
+					<td class='step-details'>Register Form Filled<img data-featherlight='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-40.png' width='10%' src='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-40.png' data-src='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-40.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:40 AM</td>
+					<td class='step-details'>Register Button Error Clicked<img data-featherlight='src/test/resources/screenshots/pass--registerErrorClick--2023-05-16--11-32-40.png' width='10%' src='src/test/resources/screenshots/pass--registerErrorClick--2023-05-16--11-32-40.png' data-src='src/test/resources/screenshots/pass--registerErrorClick--2023-05-16--11-32-40.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:40 AM</td>
+					<td class='step-details'>Errors Displayed<img data-featherlight='src/test/resources/screenshots/pass--RegisterInvalidEmail--2023-05-16--11-32-40.png' width='10%' src='src/test/resources/screenshots/pass--RegisterInvalidEmail--2023-05-16--11-32-40.png' data-src='src/test/resources/screenshots/pass--RegisterInvalidEmail--2023-05-16--11-32-40.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:41 AM</td>
+					<td class='step-details'>Errors Equals<img data-featherlight='src/test/resources/screenshots/pass--RegisterInvalidEmail--2023-05-16--11-32-40.png' width='10%' src='src/test/resources/screenshots/pass--RegisterInvalidEmail--2023-05-16--11-32-40.png' data-src='src/test/resources/screenshots/pass--RegisterInvalidEmail--2023-05-16--11-32-40.png'></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 					</div>
 				</li>
 				
@@ -175,15 +266,53 @@
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
 					<div class='test-heading'>
 						<span class='test-name'>Register Valid Data Test</span>
-						<span class='test-time'>May 16, 2023 11:12:05 AM</span>
+						<span class='test-time'>May 16, 2023 11:32:43 AM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 16, 2023 11:12:05 AM</span>
-	<span class='label end-time'>May 16, 2023 11:12:05 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+	<span class='label start-time'>May 16, 2023 11:32:43 AM</span>
+	<span class='label end-time'>May 16, 2023 11:32:45 AM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 2s+183ms</span>
 </div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:43 AM</td>
+					<td class='step-details'>My Account Link Clicked<img data-featherlight='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-43.png' width='10%' src='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-43.png' data-src='src/test/resources/screenshots/pass--myAccountClick--2023-05-16--11-32-43.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:44 AM</td>
+					<td class='step-details'>Register Form Filled<img data-featherlight='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-44.png' width='10%' src='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-44.png' data-src='src/test/resources/screenshots/pass--registerDataFill--2023-05-16--11-32-44.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:45 AM</td>
+					<td class='step-details'>Register Button Clicked<img data-featherlight='src/test/resources/screenshots/pass--registerClick--2023-05-16--11-32-45.png' width='10%' src='src/test/resources/screenshots/pass--registerClick--2023-05-16--11-32-45.png' data-src='src/test/resources/screenshots/pass--registerClick--2023-05-16--11-32-45.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:45 AM</td>
+					<td class='step-details'>Gretting Param Found<img data-featherlight='src/test/resources/screenshots/pass--RegisterValidData--2023-05-16--11-32-45.png' width='10%' src='src/test/resources/screenshots/pass--RegisterValidData--2023-05-16--11-32-45.png' data-src='src/test/resources/screenshots/pass--RegisterValidData--2023-05-16--11-32-45.png'></td>
+				</tr>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>11:32:45 AM</td>
+					<td class='step-details'>Gretting Param Equals Username<img data-featherlight='src/test/resources/screenshots/pass--RegisterValidData--2023-05-16--11-32-45.png' width='10%' src='src/test/resources/screenshots/pass--RegisterValidData--2023-05-16--11-32-45.png' data-src='src/test/resources/screenshots/pass--RegisterValidData--2023-05-16--11-32-45.png'></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 					</div>
 				</li>
 			</ul>
@@ -227,25 +356,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>0</div>
+					<div class='panel-lead'>15</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>May 16, 2023 11:11:53 AM</div>
+					<div class='panel-lead'>May 16, 2023 11:32:30 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>May 16, 2023 11:12:07 AM</div>
+			 		<div class='panel-lead'>May 16, 2023 11:32:45 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 0m 13s+551ms</div>
+					<div class='panel-lead'>0h 0m 15s+363ms</div>
 				</div>
 			</div>
 		</div>
@@ -266,7 +395,7 @@
 				skipParent: 0,
 				exceptionsParent: 0,
 				
-				passChild: 0,
+				passChild: 15,
 				failChild: 0,
 				fatalChild: 0,
 				errorChild: 0,

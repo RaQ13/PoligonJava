@@ -9,6 +9,7 @@ import pl.poligonjava.pages.MainPage;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public class LoginTest extends BaseTest{
@@ -16,7 +17,7 @@ public class LoginTest extends BaseTest{
     protected String pass;
 
     @Test
-    public void loginTest() throws FileNotFoundException {
+    public void loginTest() throws IOException {
         ExtentTest test = extentReports.createTest("Login Test");
 
         String usernameEmail = ReadFile.readFile();
@@ -34,7 +35,7 @@ public class LoginTest extends BaseTest{
     }
 
     @Test
-    public void loginEmptyPass() throws FileNotFoundException {
+    public void loginEmptyPass() throws IOException {
         ExtentTest test = extentReports.createTest("Login Empty Pass Test");
         String email = ReadFile.readFile();
         List<String> errors = new MainPage(driver, test)
@@ -47,7 +48,7 @@ public class LoginTest extends BaseTest{
     }
 
     @Test
-    public void loginInvalidPass() throws FileNotFoundException {
+    public void loginInvalidPass() throws IOException {
         ExtentTest test = extentReports.createTest("Login Invalid Password Test");
         String email = ReadFile.readFile();
         List<String> errors = new MainPage(driver, test)

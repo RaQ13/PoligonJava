@@ -48,9 +48,10 @@ public class MainPage {
         this.test = test;
     }
 
-    public AccountPage myAccountClick() {
+    public AccountPage myAccountClick() throws IOException {
         myAccLink.click();
-        return new AccountPage(driver);
+        test.log(Status.PASS, "My Account Link Clicked", screenShot.getScreenshotMethodName("pass", driver));
+        return new AccountPage(driver, test);
     }
 
     public ProductsPage shopClick() throws IOException {
