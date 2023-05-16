@@ -27,6 +27,7 @@ public class LoginTest extends BaseTest{
         test.log(Status.PASS, "Email Read From File", screenShot.getScreenshotMethodName("pass", driver));
         this.pass = usernameEmail;
         String username = usernameEmail.replace("@gmail.com", "");
+        test.log(Status.PASS, "Name Created");
 
         WebElement greetingParam =
                 new MainPage(driver, test)

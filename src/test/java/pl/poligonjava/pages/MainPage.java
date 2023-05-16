@@ -24,16 +24,16 @@ public class MainPage {
     @FindBy (linkText = "Shop")
     private WebElement shopLink;
 
-    @FindBy (id = "nimble_name317664225")
+    @FindBy (name = "nimble_name")
     private WebElement formDataName;
 
-    @FindBy (id = "nimble_email317664225")
+    @FindBy (name = "nimble_email")
     private WebElement formDataEmail;
 
-    @FindBy (id = "nimble_message317664225")
+    @FindBy (name = "nimble_message")
     private WebElement formDataMessage;
 
-    @FindBy (id = "nimble_submit317664225")
+    @FindBy (name = "nimble_submit")
     private WebElement submitFormBtn;
 
     @FindBy (id = "sek-form-respond")
@@ -41,6 +41,8 @@ public class MainPage {
 
     @FindBy(xpath = "//a[@class='czr-title']")
     private List<WebElement> postsLinks;
+
+    //TODO jeżeli błąd to i tak robi screena końcowego
 
     public MainPage(WebDriver driver, ExtentTest test) {
         PageFactory.initElements(driver, this);
@@ -69,6 +71,7 @@ public class MainPage {
     }
 
     public MainPage submitContactForm() throws IOException {
+        SeleniumHelper.scrollDown(driver);
         submitFormBtn.click();
         test.log(Status.PASS, "Contact Form Submitted", screenShot.getScreenshotMethodName("pass", driver));
         return this;
