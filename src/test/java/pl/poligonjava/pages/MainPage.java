@@ -81,14 +81,16 @@ public class MainPage {
     }
 
     public PostPage getFirstPost() throws IOException {
+        SeleniumHelper.scrollDown(driver);
         postsLinks.get(0).click();
         test.log(Status.PASS, "Firts Post Found", screenShot.getScreenshotMethodName("pass", driver));
-        return new PostPage(driver);
+        return new PostPage(driver, test);
     }
 
     public PostPage getSecondPost() throws IOException {
+        SeleniumHelper.scrollDown(driver);
         postsLinks.get(1).click();
         test.log(Status.PASS, "Second Post Found", screenShot.getScreenshotMethodName("pass", driver));
-        return new PostPage(driver);
+        return new PostPage(driver, test);
     }
 }

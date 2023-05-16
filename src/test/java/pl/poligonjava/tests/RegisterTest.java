@@ -42,8 +42,10 @@ public class RegisterTest extends BaseTest {
 
         CreateFile.createFile();
         WriteText.writeText(email);
+        test.log(Status.PASS, "Email Written To File");
         String line = ReadFile.readFile();
         String username = line.replace("@gmail.com", "");
+        test.log(Status.PASS, "Username Received");
 
         WebElement greetingParam = new MainPage(driver, test)
                 .myAccountClick()
@@ -60,6 +62,7 @@ public class RegisterTest extends BaseTest {
     public void RegisterExistingEmail() throws IOException {
         ExtentTest test = extentReports.createTest("Register Existing Email Test");
         String email = ReadFile.readFile();
+        test.log(Status.PASS, "Email Read From File");
 
         List<String> errors = new MainPage(driver, test)
                 .myAccountClick()
@@ -75,7 +78,10 @@ public class RegisterTest extends BaseTest {
     public void RegisterInvalidEmail() throws IOException {
         ExtentTest test = extentReports.createTest("Register Valid Data Test");
         String email = ReadFile.readFile();
+        test.log(Status.PASS, "Email Read From File");
         String invalidEmail = email.replace(".com", "");
+        test.log(Status.PASS, "Wrong Email Created");
+
 
         List<String> errors = new MainPage(driver, test)
                 .myAccountClick()
