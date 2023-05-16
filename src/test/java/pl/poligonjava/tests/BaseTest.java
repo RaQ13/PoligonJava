@@ -8,8 +8,7 @@ import pl.poligonjava.utils.DriverFactory;
 
 public class BaseTest {
 
-    protected WebDriver driver;
-
+    public WebDriver driver;
     public static ExtentHtmlReporter htmlReporter;
     public static ExtentReports extentReports;
 

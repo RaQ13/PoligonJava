@@ -4,9 +4,11 @@ import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pl.poligonjava.pages.LoggedPage;
 import pl.poligonjava.pages.MainPage;
+import pl.poligonjava.utils.Listener;
 import pl.poligonjava.utils.filewirtter.CreateFile;
 import pl.poligonjava.utils.filewirtter.ReadFile;
 import pl.poligonjava.utils.filewirtter.WriteText;
@@ -14,6 +16,8 @@ import pl.poligonjava.utils.filewirtter.WriteText;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+
+@Listeners(value = {Listener.class})
 
 public class RegisterTest extends BaseTest {
 

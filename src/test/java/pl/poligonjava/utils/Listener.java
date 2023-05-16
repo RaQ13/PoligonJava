@@ -4,23 +4,31 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import pl.poligonjava.tests.BaseTest;
 
 
-public class Listener implements ITestListener {
+public class Listener extends BaseTest implements ITestListener {
 
-    protected WebDriver driver = DriverFactory.getDriver();
+    protected WebDriver driver;
     protected String status;
-
-    private ScreenShot screenShot = new ScreenShot(driver);
+    private ScreenShot screenShot;
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.println("I am starting Test");
+
+        try {
+            this.driver=(WebDriver)result.getTestClass().getRealClass().getSuperclass().getDeclaredField("driver").get(result.getInstance());
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+        this.screenShot = new ScreenShot(this.driver);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        this.status = "pass";
+        this.status = "success";
         screenShot.takeScreenshot(this.status, driver);
     }
 
@@ -51,8 +59,7 @@ public class Listener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        this.status = "start";
-        screenShot.takeScreenshot(this.status, driver);
+
     }
 
     @Override
