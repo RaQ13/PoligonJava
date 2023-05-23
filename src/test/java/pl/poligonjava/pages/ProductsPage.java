@@ -24,6 +24,15 @@ public class ProductsPage {
     @FindBy(xpath = "//a[text()='Add to cart']")
     List<WebElement> addToCartLinks;
 
+    @FindBy(xpath = "//a[@data-product_id='29']")
+    private WebElement bdbCucumber;
+
+    @FindBy(xpath = "//a[@data-product_id='27']")
+    private WebElement gitBasics;
+
+    @FindBy(xpath = "//a[@data-product_id='8']")
+    private WebElement javaSeleniumWebdriver;
+
     @FindBy(linkText = "Cart")
     private WebElement cartLink;
 
@@ -59,6 +68,25 @@ public class ProductsPage {
         test.log(Status.PASS, "All Produtcts Added", screenShot.getScreenshotMethodName("pass", driver));
         return this;
     }
+
+    public ProductsPage addBdbCucumber() {
+        SeleniumHelper.waitForElementToBeClicable(driver, bdbCucumber);
+        bdbCucumber.click();
+        return this;
+    }
+
+    public ProductsPage addGitBasics() {
+        SeleniumHelper.waitForElementToBeClicable(driver, gitBasics);
+        gitBasics.click();
+        return this;
+    }
+
+    public ProductsPage addJavaSeleniumWebdriver() {
+        SeleniumHelper.waitForElementToBeClicable(driver, javaSeleniumWebdriver);
+        javaSeleniumWebdriver.click();
+        return this;
+    }
+
     /** Sprawdza content pseudoelementu */
     public Object getPseudoelem(String uniqueId) throws IOException {
         String script = "return window.getComputedStyle(document.querySelector('a.add_to_cart_button[data-product_id=\""+ uniqueId + "\"]'), ':after').getPropertyValue('content')";
@@ -86,7 +114,10 @@ public class ProductsPage {
 
     public CartPage cartLinkClick() throws IOException {
         SeleniumHelper.waitForElemetToBeVisible(driver, cartLink);
+        System.out.println(countProductsInCart);
+        System.out.println(countProductsInCart.get(0).getText());
         String productsInCart = countProductsInCart.stream().filter(WebElement::isDisplayed).toList().get(0).getText();
+        System.out.println(productsInCart);
         if (addToCartLinks.size() == Integer.parseInt(productsInCart)) {
             cartLink.click();
         }

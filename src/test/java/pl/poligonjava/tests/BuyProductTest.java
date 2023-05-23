@@ -35,4 +35,20 @@ public class BuyProductTest extends BaseTest{
 
         test.log(Status.PASS, "All Products Bought", screenShot.getScreenshotMethodName("pass", driver));
     }
+
+    @Test
+    public void buyBdbCucumber() throws IOException {
+        ExtentTest test = extentReports.createTest("Buy BDB Cucumber");
+        Customer customer = new Customer();
+        new MainPage(driver, test)
+                .shopClick()
+                .addBdbCucumber()
+                .cartLinkClick()
+                .proceedBtnClick()
+                .fillForm(customer)
+                .checkProducts()
+                .checkPayment()
+                .placeOrderClick()
+                .checkOrderDetails();
+    }
 }

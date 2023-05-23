@@ -13,7 +13,7 @@ import pl.poligonjava.utils.filewirtter.ReadFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class PostTest extends BaseTest{
+public class  PostTest extends BaseTest{
 
     public ScreenShot screenShot = new ScreenShot(driver);
 
@@ -32,7 +32,8 @@ public class PostTest extends BaseTest{
         new MainPage(driver, test)
                 .getFirstPost()
                 .fillCommentForm(email, name, email, url)
-                .submitCommentForm();
+                .submitCommentForm()
+                .checkIsSubmited();
         test.log(Status.PASS, "First Post Comment Submited", screenShot.getScreenshotMethodName("pass", driver));
     }
 
@@ -67,7 +68,8 @@ public class PostTest extends BaseTest{
         new MainPage(driver, test)
                 .getSecondPost()
                 .fillCommentForm(email, name, email, url)
-                .submitCommentForm();
+                .submitCommentForm()
+                .checkIsSubmited();
         test.log(Status.PASS, "Second Post Comment Submited", screenShot.getScreenshotMethodName("pass", driver));
     }
 

@@ -42,6 +42,7 @@ public class CartPage {
     public CartPage checkAreAllProducts() throws IOException {
         Assert.assertEquals(productsListNames.size(), 3);
         List<String> productsNames = productsListNames.stream().map(WebElement::getText).collect(Collectors.toList());
+        System.out.println(productsNames.size());
         Assert.assertTrue(productsNames.contains("Java Selenium WebDriver"));
         Assert.assertTrue(productsNames.contains("GIT basics"));
         Assert.assertTrue(productsNames.contains("BDD Cucumber"));

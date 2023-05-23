@@ -29,4 +29,11 @@ public class ErrorPage {
         test.log(Status.PASS, "Error Message Displayed", screenShot.getScreenshotMethodName("pass", driver));
         return errorMsg;
     }
+
+    public void checkIsSubmited() throws IOException {
+        if (errorMsg != null) {
+            test.log(Status.FAIL, "Error Message Found", screenShot.getScreenshotMethodName("failed", driver));
+            throw new IOException("Duplicate comment detected; it looks as though you’ve already said that!");
+        }
+    }
 }

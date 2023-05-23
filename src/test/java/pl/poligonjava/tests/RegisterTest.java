@@ -23,7 +23,7 @@ import java.util.List;
 
 public class RegisterTest extends BaseTest {
 
-    /** Bazy na stronie resetujasię co 24 godziny
+    /** Bazy na stronie resetuja się co 24 godziny
      *
      * Tworzy randomowy email
      * Zapisuje w pliku i korzysta w logowaniu
