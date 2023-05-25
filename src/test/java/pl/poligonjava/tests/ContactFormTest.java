@@ -4,8 +4,10 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pl.poligonjava.pages.MainPage;
+import pl.poligonjava.utils.Listener;
 import pl.poligonjava.utils.ScreenShot;
 import pl.poligonjava.utils.SeleniumHelper;
 import pl.poligonjava.utils.filewirtter.ReadFile;
@@ -13,6 +15,7 @@ import pl.poligonjava.utils.filewirtter.ReadFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+@Listeners(value = {Listener.class})
 public class ContactFormTest extends BaseTest{
 
     ScreenShot screenShot = new ScreenShot(driver);

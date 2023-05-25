@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import pl.poligonjava.utils.ScreenShot;
 import pl.poligonjava.utils.SeleniumHelper;
 
@@ -42,7 +43,8 @@ public class MainPage {
     @FindBy(xpath = "//a[@class='czr-title']")
     private List<WebElement> postsLinks;
 
-    //TODO jeżeli błąd to i tak robi screena końcowego
+    @FindBy(xpath = "//img")
+    private List<WebElement> images;
 
     public MainPage(WebDriver driver, ExtentTest test) {
         PageFactory.initElements(driver, this);
@@ -74,6 +76,12 @@ public class MainPage {
         SeleniumHelper.scrollDown(driver);
         submitFormBtn.click();
         test.log(Status.PASS, "Contact Form Submitted", screenShot.getScreenshotMethodName("pass", driver));
+        return this;
+    }
+
+    public MainPage checkImages() throws IOException {
+        images.stream().forEach(img -> {Assert.assertTrue(Integer.parseInt(img.getAttribute("naturalHeight")) > 0);});
+        test.log(Status.PASS, "Images From Main Page Checked", screenShot.getScreenshotMethodName("pass", driver));
         return this;
     }
 
